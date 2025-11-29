@@ -8,7 +8,7 @@ An AI financial advisor for Nepal that actually knows the laws.
 
 ## What is this?
 
-ChitraGupta is a chatbot that can answer business questions specific to Nepal. Instead of generic advice, it knows actual Nepal tax laws, VAT rates, registration requirements, etc. because we trained it on 400+ pages of official government documents.
+ChitraGupta is a chatbot that can answer business questions specific to Nepal. Instead of generic advice, it knows actual Nepal tax laws, VAT rates, registration requirements, etc. because we trained it on 400+ pages of official government documents..
 
 ## Quick Demo
 
