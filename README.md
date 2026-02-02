@@ -1,100 +1,86 @@
 # ChitraGupta
 
-AI-powered Nepal Business & Tax Advisor
-
 ## Overview
+ChitraGupta is a local Flask application that runs a GGUF Llama model with llama-cpp-python for Nepal business and tax Q&A.
+The backend builds prompts from static knowledge, industry heuristics, and short in-session conversation history.
 
-ChitraGupta is a standalone AI financial advisor specializing in Nepal's business landscape. It provides expert guidance on company registration, VAT compliance, income tax, licensing requirements, and industry-specific regulations.
+## Core Functionality
+- Exposes chat APIs through Flask routes.
+- Loads a local GGUF model and performs direct local inference.
+- Classifies query intent using keyword rules.
+- Detects industry from keywords and injects matching industry heuristics into prompts.
+- Injects Nepal tax and compliance context from in-code and JSON knowledge sources.
+- Keeps short in-memory conversation history per process.
 
-## Features
+## System Overview (Simple Flow)
+User Input -> Backend -> Model -> Response
 
-- Nepal-specific tax and business law guidance
-- Company registration procedures and requirements
-- VAT and income tax consultation
-- Industry-specific advice (retail, technology, hospitality, manufacturing, etc.)
-- Multi-turn conversational memory
-- Completely offline operation
-- GPU-accelerated inference (RTX 4050)
+Detailed runtime flow:
+User Query -> /chat route -> StandaloneAdvisor -> llama-cpp inference -> JSON response
 
-## Tech Stack
+## Tech Stack (Backend-Focused)
+- Flask (HTTP server and API routes)
+- llama-cpp-python (local LLM inference)
+- GGUF model file (llama3.gguf)
+- Python JSON-based context data (industry heuristics)
+- Optional CUDA acceleration via llama-cpp-python CUDA wheel
 
-- **Backend**: Flask
-- **AI Model**: LLaMA 3.2 3B (GGUF format)
-- **Inference**: llama-cpp-python with CUDA support
-- **Frontend**: HTML/CSS/JavaScript with Tailwind CSS
-
-## Installation
+## Setup Instructions (VERY IMPORTANT)
 
 ### Prerequisites
+- Python 3.10 or newer
+- Windows shell support for batch scripts
+- Optional NVIDIA GPU with CUDA (CPU execution is possible but slower)
+- Model file: models/llama3.gguf
 
-- Python 3.10+
-- NVIDIA GPU with CUDA support (optional but recommended)
+### Installation
+1. Create and activate a virtual environment (recommended).
+2. Install dependencies:
 
-### Setup
+   python -m pip install -r requirements.txt
 
-1. **Install dependencies**:
-   ```bash
-   install.bat
-   ```
+3. Install llama-cpp-python:
 
-   This installs Flask and llama-cpp-python with GPU acceleration.
+   GPU build (CUDA 12.4 wheel):
+   python -m pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu124
 
-2. **Run the application**:
-   ```bash
-   run.bat
-   ```
+   CPU fallback:
+   python -m pip install llama-cpp-python
 
-3. **Access the interface**:
-   Open http://localhost:5000 in your browser
+4. Place the model file at models/llama3.gguf.
+5. Optional shortcut: run install.bat to execute package installation steps.
+
+### Run Application
+Use either command:
+
+run.bat
+
+or
+
+python app.py
+
+### Access
+http://localhost:5000
 
 ## Project Structure
+- app.py: Flask entry point, route handlers, startup initialization.
+- standalone_advisor.py: Model loading, intent detection, context building, prompt formatting, inference.
+- config.py: Static token values (not used by app.py runtime path).
+- data/industry_heuristics.json: Industry mapping used for context injection.
+- models/llama3.gguf: Local GGUF model file.
+- install.bat: Dependency installation script.
+- run.bat: Application run script.
 
-```
-ChitraGupta/
-├── app.py                    # Flask application
-├── standalone_advisor.py     # AI advisor engine
-├── config.py                 # Configuration settings
-├── models/
-│   └── llama3.gguf          # LLaMA 3.2 3B model
-├── templates/
-│   └── premium_chat.html    # Chat interface
-├── static/
-│   └── chitragupta.png      # Application logo
-├── data/                     # Knowledge base
-├── install.bat               # One-time setup script
-└── run.bat                   # Application launcher
-```
-
-## Model
-
-The project uses LLaMA 3.2 3B Instruct in GGUF format, loaded directly via llama-cpp-python. The model is fully offloaded to GPU for optimal performance.
-
-## Usage
-
-1. Start the application using `run.bat`
-2. Enter your business or tax-related questions
-3. Receive context-aware, Nepal-specific guidance
-4. Use the clear button to start a new conversation
-
-## Built For
-
-Gen AI Workshop
+## Limitations
+- The model can produce incorrect or incomplete responses.
+- This project is not a production-grade advisory system.
+- Performance and output characteristics depend on local hardware and model size.
+- Conversation memory is process-local and is lost on restart.
+- No authentication, persistent storage, or rate limiting is implemented in the API.
+- Embedding and FAISS artifacts exist under data/processed but are not used by the current runtime pipeline.
 
 ## Team
-
-**Aayush Acharya**  
-[LinkedIn](https://www.linkedin.com/in/acharyaaayush) | [GitHub](https://github.com/acharya-aayush) | [Instagram](https://www.instagram.com/acharya.404)  
-Email: acharyaaayush2k4@gmail.com
-
-**Nidhi Pradhan**  
-[LinkedIn](https://www.linkedin.com/in/nidhi-pradhan-79bb6a257/)
-
-**Suravi Paudel**  
-[LinkedIn](https://www.linkedin.com/in/suravi-poudel-115713311/)
-
-**Mentor: Er. Sujan Sharma**  
-[LinkedIn](https://www.linkedin.com/in/sujan-sharma45/)
-
-## License
-
-MIT
+- Aayush Acharya
+- Nidhi Pradhan
+- Suravi Paudel
+- Mentor: Er. Sujan Sharma
