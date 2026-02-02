@@ -1,6 +1,6 @@
 """
-ChitraGupta Simple Flask App - Lightweight Version
-No heavy ML dependencies, just Ollama
+ChitraGupta - Standalone Flask App
+No Ollama dependency - runs model locally via llama-cpp-python
 """
 
 from flask import Flask, render_template, request, jsonify
@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-# Import lightweight advisor
-from lightweight_advisor import get_response, clear_memory, get_advisor
+# Import standalone advisor (loads GGUF model directly)
+from standalone_advisor import get_response, clear_memory, get_advisor
 
 @app.route('/')
 def index():
@@ -81,18 +81,22 @@ def health():
 
 if __name__ == '__main__':
     print("=" * 60)
-    print("🏛️  ChitraGupta Lightweight - Nepal Business Advisor")
+    print("  ChitraGupta - Standalone Mode (No Ollama)")
     print("=" * 60)
-    print("📍 Starting server at http://localhost:5000")
-    print("💡 Using Ollama (llama3.2:3b) - no heavy ML deps")
+    print("  Loading GGUF model via llama-cpp-python...")
+    print("  GPU: RTX 4050 (Full Offload)")
     print("=" * 60)
     
     # Initialize advisor on startup
     try:
         advisor = get_advisor()
-        print("✅ Advisor initialized successfully!")
+        print("  Model loaded successfully!")
     except Exception as e:
-        print(f"❌ Failed to initialize: {e}")
+        print(f"  ERROR: {e}")
         exit(1)
+    
+    print("=" * 60)
+    print("  Server: http://localhost:5000")
+    print("=" * 60)
     
     app.run(host='0.0.0.0', port=5000, debug=False, threaded=True)

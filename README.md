@@ -1,72 +1,99 @@
 # ChitraGupta
 
-AI-powered Nepal Business & Tax Advisor using LLaMA 3.2
+AI-powered Nepal Business & Tax Advisor
 
-## Quick Start
+## Overview
 
-### Local Development
+ChitraGupta is a standalone AI financial advisor specializing in Nepal's business landscape. It provides expert guidance on company registration, VAT compliance, income tax, licensing requirements, and industry-specific regulations.
 
-1. **Prerequisites**: Install [Ollama](https://ollama.com) and pull the model:
+## Features
+
+- Nepal-specific tax and business law guidance
+- Company registration procedures and requirements
+- VAT and income tax consultation
+- Industry-specific advice (retail, technology, hospitality, manufacturing, etc.)
+- Multi-turn conversational memory
+- Completely offline operation
+- GPU-accelerated inference (RTX 4050)
+
+## Tech Stack
+
+- **Backend**: Flask
+- **AI Model**: LLaMA 3.2 3B (GGUF format)
+- **Inference**: llama-cpp-python with CUDA support
+- **Frontend**: HTML/CSS/JavaScript with Tailwind CSS
+
+## Installation
+
+### Prerequisites
+
+- Python 3.10+
+- NVIDIA GPU with CUDA support (optional but recommended)
+
+### Setup
+
+1. **Install dependencies**:
+   ```bash
+   install.bat
    ```
-   ollama pull llama3.2:3b
+
+   This installs Flask and llama-cpp-python with GPU acceleration.
+
+2. **Run the application**:
+   ```bash
+   run.bat
    ```
 
-2. **Install dependencies**:
-   ```
-   pip install -r requirements.txt
-   ```
-
-3. **Run**:
-   ```
-   python app.py
-   ```
-
-4. Open http://localhost:5000
-
-### Docker Deployment
-
-```bash
-# Build and run
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop
-docker-compose down
-```
-
-**Note**: Ollama must be running on your host machine. The container connects to it via `host.docker.internal:11434`.
+3. **Access the interface**:
+   Open http://localhost:5000 in your browser
 
 ## Project Structure
 
 ```
-chitragupta/
- app.py                 # Flask application
- lightweight_advisor.py # AI advisor engine
- config.py             # Configuration
- templates/
-    premium_chat.html # Chat interface
- static/
-    chitragupta.png   # Logo
- data/                 # Knowledge base
- Dockerfile
- docker-compose.yml
- requirements.txt
+ChitraGupta/
+├── app.py                    # Flask application
+├── standalone_advisor.py     # AI advisor engine
+├── config.py                 # Configuration settings
+├── models/
+│   └── llama3.gguf          # LLaMA 3.2 3B model
+├── templates/
+│   └── premium_chat.html    # Chat interface
+├── static/
+│   └── chitragupta.png      # Application logo
+├── data/                     # Knowledge base
+├── install.bat               # One-time setup script
+└── run.bat                   # Application launcher
 ```
 
-## Tech Stack
+## Model
 
-- **Backend**: Flask + Gunicorn
-- **LLM**: Ollama (LLaMA 3.2 3B)
-- **Container**: Docker
+The project uses LLaMA 3.2 3B Instruct in GGUF format, loaded directly via llama-cpp-python. The model is fully offloaded to GPU for optimal performance.
 
-## Features
+## Usage
 
-- Nepal VAT, Income Tax, Company Registration guidance
-- Multi-turn conversation with memory
-- Industry-specific advice
-- No heavy ML dependencies (uses Ollama API)
+1. Start the application using `run.bat`
+2. Enter your business or tax-related questions
+3. Receive context-aware, Nepal-specific guidance
+4. Use the clear button to start a new conversation
+
+## Built For
+
+Gen AI Workshop
+
+## Team
+
+**Aayush Acharya**  
+[LinkedIn](https://www.linkedin.com/in/acharyaaayush) | [GitHub](https://github.com/acharya-aayush) | [Instagram](https://www.instagram.com/acharya.404)  
+Email: acharyaaayush2k4@gmail.com
+
+**Nidhi Pradhan**  
+[LinkedIn](https://www.linkedin.com/in/nidhi-pradhan-79bb6a257/)
+
+**Suravi Paudel**  
+[LinkedIn](https://www.linkedin.com/in/suravi-poudel-115713311/)
+
+**Mentor: Er. Sujan Sharma**  
+[LinkedIn](https://www.linkedin.com/in/sujan-sharma45/)
 
 ## License
 
