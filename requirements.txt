@@ -1,37 +1,5 @@
-# Required packages for GENAI-PRJCT
-# QLoRA Fine-tuning for Domain-Specific LLM
-
-# Core ML libraries
-torch>=2.0.0
-torchvision
-torchaudio
-
-# Transformers ecosystem
-transformers>=4.35.0
-tokenizers>=0.15.0
-accelerate>=0.25.0
-
-# PEFT and quantization
-peft>=0.7.0
-bitsandbytes>=0.41.0
-
-# Training and datasets
-trl>=0.7.0
-datasets>=2.14.0
-
-# Utilities
-numpy
-pandas
-tqdm
-matplotlib
-seaborn
-
-# Hugging Face Hub
-huggingface_hub
-
-# Optional: For better performance
-flash-attn
-
-# Development utilities
-jupyter
-ipywidgets
+# ChitraGupta - Production Requirements
+flask>=3.0.0
+gunicorn>=21.0.0
+requests>=2.31.0
+python-dotenv>=1.0.0

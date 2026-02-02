@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChitraGupta - AI Financial Advisor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chat-scrollbar::-webkit-scrollbar { width: 4px; }
+        .chat-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .chat-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 2px; }
+        .chat-scrollbar::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+        
+        .message-enter { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .typing span {
+            animation: blink 1.4s infinite both;
+            background: #94a3b8;
+            width: 6px; height: 6px; border-radius: 50%;
+            display: inline-block; margin: 0 2px;
+        }
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink {
+            0%, 80%, 100% { opacity: 0.3; }
+            40% { opacity: 1; }
+        }
+
+        textarea {
+            field-sizing: content;
+            min-height: 24px;
+            max-height: 120px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <div class="max-w-3xl mx-auto h-screen flex flex-col">
+        
+        <!-- Clean Header -->
+        <header class="bg-white border-b border-slate-200 px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img src="{{ url_for('static', filename='chitragupta.png') }}" alt="ChitraGupta" class="w-10 h-10 rounded-lg">
+                    <div>
+                        <h1 class="text-lg font-semibold text-slate-900">ChitraGupta</h1>
+                        <div class="flex items-center gap-2 text-xs text-slate-500">
+                            <span id="statsDisplay">0 interactions</span>
+                            <span class="text-slate-300">|</span>
+                            <span id="timeDisplay">0.00s</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                Memory: <span id="memoryStatus">Active</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="newChat()" class="text-slate-400 hover:text-slate-600 transition p-2" title="New conversation">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Area -->
+        <main id="chatArea" class="flex-1 overflow-y-auto chat-scrollbar p-6 space-y-6">
+            
+            <!-- Welcome -->
+            <div class="message-enter">
+                <div class="flex gap-3">
+                    <img src="{{ url_for('static', filename='chitragupta.png') }}" class="w-8 h-8 rounded-lg flex-shrink-0">
+                    <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-slate-100 max-w-[85%]">
+                        <p class="text-slate-800 font-medium mb-2">Namaste! I'm ChitraGupta</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">Your Nepal business & tax expert. I provide direct, actionable guidance on company registration, VAT, income tax, and compliance.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Input Area -->
+        <footer class="bg-white border-t border-slate-200 p-4">
+            <div class="flex items-end gap-3">
+                <div class="flex-1 relative">
+                    <textarea 
+                        id="input" 
+                        rows="1"
+                        placeholder="Ask about taxes, registration, licenses..."
+                        class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-slate-800 placeholder-slate-400 text-sm"
+                        onkeydown="handleKey(event)"
+                    ></textarea>
+                </div>
+                <button onclick="send()" id="sendBtn" class="p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const chatArea = document.getElementById('chatArea');
+        const input = document.getElementById('input');
+        const sendBtn = document.getElementById('sendBtn');
+        let loading = false;
+        let interactionCount = 0;
+        let totalTime = 0;
+
+        function handleKey(e) {
+            if (e.key === 'Enter' && !e.shiftKey && !loading) {
+                e.preventDefault();
+                send();
+            }
+        }
+
+        async function send() {
+            const msg = input.value.trim();
+            if (!msg || loading) return;
+
+            addMessage(msg, 'user');
+            input.value = '';
+            input.style.height = 'auto';
+
+            loading = true;
+            sendBtn.disabled = true;
+            const typingEl = showTyping();
+
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: msg })
+                });
+                const data = await res.json();
+                typingEl.remove();
+
+                if (data.success) {
+                    addMessage(data.response, 'bot');
+                    interactionCount++;
+                    if (data.metadata && data.metadata.response_time) {
+                        totalTime += data.metadata.response_time;
+                    }
+                    updateStats();
+                } else {
+                    addMessage('Sorry, something went wrong. Please try again.', 'bot');
+                }
+            } catch (e) {
+                typingEl.remove();
+                addMessage('Connection error. Please check if the server is running.', 'bot');
+            } finally {
+                loading = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        function addMessage(text, type) {
+            const div = document.createElement('div');
+            div.className = 'message-enter';
+            
+            const formatted = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>');
+
+            if (type === 'user') {
+                div.innerHTML = `
+                    <div class="flex justify-end">
+                        <div class="bg-blue-600 text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
+                            <p class="text-sm">${formatted}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                div.innerHTML = `
+                    <div class="flex gap-3">
+                        <img src="{{ url_for('static', filename='chitragupta.png') }}" class="w-8 h-8 rounded-lg flex-shrink-0">
+                        <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-slate-100 max-w-[85%]">
+                            <div class="text-slate-700 text-sm leading-relaxed">${formatted}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            chatArea.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'message-enter';
+            div.innerHTML = `
+                <div class="flex gap-3">
+                    <img src="{{ url_for('static', filename='chitragupta.png') }}" class="w-8 h-8 rounded-lg flex-shrink-0">
+                    <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-slate-100">
+                        <div class="typing flex items-center gap-1">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatArea.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
+            return div;
+        }
+
+        function updateStats() {
+            document.getElementById('statsDisplay').textContent = interactionCount + ' interaction' + (interactionCount !== 1 ? 's' : '');
+            document.getElementById('timeDisplay').textContent = totalTime.toFixed(2) + 's';
+        }
+
+        async function newChat() {
+            try {
+                await fetch('/memory/clear', { method: 'POST' });
+                interactionCount = 0;
+                totalTime = 0;
+                updateStats();
+                document.getElementById('memoryStatus').textContent = 'Active';
+                chatArea.innerHTML = `
+                    <div class="message-enter">
+                        <div class="flex gap-3">
+                            <img src="{{ url_for('static', filename='chitragupta.png') }}" class="w-8 h-8 rounded-lg flex-shrink-0">
+                            <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-slate-100 max-w-[85%]">
+                                <p class="text-slate-800 font-medium mb-2">Fresh start!</p>
+                                <p class="text-slate-600 text-sm">Memory cleared. What business would you like to discuss?</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (e) {
+                console.error('Failed to clear:', e);
+            }
+        }
+
+        input.focus();
+    </script>
+</body>
+</html>

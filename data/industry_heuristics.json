@@ -1,0 +1,309 @@
+{
+  "industry_mappings": {
+    "gaming": {
+      "sector": "Information and Communication Technology (ICT)",
+      "business_category": "Software/IT Company",
+      "recommended_structure": "Private Limited Company",
+      "reasoning": "Protects intellectual property, facilitates investment, enables equity distribution",
+      "specific_rules": [
+        "Falls under 'Information Technology' sector per Nepal Industrial Enterprises Act",
+        "Eligible for 50% income tax rebate on export income (software exports)",
+        "Must register with Department of Industry under 'IT/ITES' category",
+        "Can claim R&D expenses as deductible under Income Tax Act Section 16",
+        "Qualifies for IT Park incentives if located in designated zones",
+        "VAT zero-rated on software exports to foreign clients"
+      ],
+      "registration_path": [
+        "1. Reserve company name at Office of Company Registrar (OCR)",
+        "2. Register as Private Limited with minimum NPR 1 lakh capital",
+        "3. Obtain PAN from IRD within 30 days",
+        "4. Register for VAT if turnover expected >NPR 50 lakhs",
+        "5. Register with Department of Industry for IT classification",
+        "6. Open corporate bank account"
+      ],
+      "tax_benefits": {
+        "export_income": "50% tax rebate on export earnings",
+        "it_park_location": "Additional 25% rebate if in IT Park",
+        "startup_exemption": "First 5 years partial exemption possible"
+      },
+      "common_mistakes": [
+        "Not registering IP/copyright with DoI",
+        "Missing export documentation for tax rebates",
+        "Incorrect VAT treatment of software licenses vs services"
+      ]
+    },
+    "software": {
+      "sector": "Information and Communication Technology (ICT)",
+      "business_category": "Software Development Company",
+      "recommended_structure": "Private Limited Company",
+      "reasoning": "IP protection, investment readiness, professional credibility",
+      "specific_rules": [
+        "Same benefits as gaming sector - IT/ITES classification",
+        "Software exports are zero-rated for VAT purposes",
+        "Can establish as 100% foreign-owned if bringing FDI",
+        "Eligible for Board of Investment (BOI) incentives for large projects"
+      ],
+      "registration_path": [
+        "1. Company name reservation at OCR",
+        "2. Private Limited registration (recommended) or Sole Proprietorship",
+        "3. PAN registration at IRD",
+        "4. VAT registration if applicable",
+        "5. Industry registration at DoI",
+        "6. Professional body registration (optional but adds credibility)"
+      ]
+    },
+    "restaurant": {
+      "sector": "Tourism and Hospitality",
+      "business_category": "Food and Beverage Service",
+      "recommended_structure": "Sole Proprietorship or Partnership (small), Pvt Ltd (chain/expansion plans)",
+      "reasoning": "Simpler compliance for small operations, Pvt Ltd for growth/franchise",
+      "specific_rules": [
+        "Requires Food License from DFTQC (Department of Food Technology)",
+        "Health permit from local municipality mandatory",
+        "Tourism license if targeting tourists (adds benefits)",
+        "Liquor license separate application if serving alcohol",
+        "Fire safety certificate required for seating >30",
+        "VAT mandatory if turnover >NPR 50 lakhs annually"
+      ],
+      "registration_path": [
+        "1. Register business (Sole Prop at DAO or Pvt Ltd at OCR)",
+        "2. Obtain PAN from IRD",
+        "3. Apply for Food License from DFTQC",
+        "4. Get health permit from local ward office",
+        "5. Fire safety clearance (for larger establishments)",
+        "6. Optional: Tourism license from Ministry of Tourism"
+      ],
+      "tax_obligations": {
+        "vat_rate": "13% on food and beverages",
+        "service_charge": "10% service charge common (not mandatory)",
+        "tds_on_rent": "10% TDS on rent payments",
+        "income_tax": "Standard business rates apply"
+      },
+      "common_mistakes": [
+        "Operating without food license (heavy penalties)",
+        "Not maintaining VAT-compliant billing",
+        "Missing monthly VAT returns"
+      ]
+    },
+    "clothing": {
+      "sector": "Manufacturing/Retail Trade",
+      "business_category": "Garment/Textile Business",
+      "recommended_structure": "Sole Proprietorship (retail), Pvt Ltd (manufacturing/export)",
+      "reasoning": "Retail is simple, manufacturing needs formal structure for GSP benefits",
+      "specific_rules": [
+        "Manufacturing qualifies for industry incentives",
+        "Export-oriented garments get duty drawback benefits",
+        "GSP (Generalized System of Preferences) benefits for EU/US exports",
+        "Raw material imports can get customs duty exemption",
+        "Local content rules apply for 'Made in Nepal' label"
+      ],
+      "registration_path": [
+        "1. Business registration (DAO for Sole Prop, OCR for Pvt Ltd)",
+        "2. PAN registration",
+        "3. VAT registration (mandatory for manufacturing)",
+        "4. Industry registration at DoI (for manufacturing)",
+        "5. Export license from DoC if exporting",
+        "6. Quality certification if needed (for exports)"
+      ],
+      "tax_considerations": {
+        "import_duty": "Varies 5-30% on fabric/materials",
+        "vat_on_local_sales": "13%",
+        "export_vat": "Zero-rated",
+        "income_tax_manufacturing": "20% (reduced rate for manufacturing)"
+      }
+    },
+    "consulting": {
+      "sector": "Professional Services",
+      "business_category": "Management/Business Consulting",
+      "recommended_structure": "Sole Proprietorship (individual), Pvt Ltd (firm with employees)",
+      "reasoning": "Sole prop is tax-efficient for individuals, Pvt Ltd for team/credibility",
+      "specific_rules": [
+        "No specific license required for general consulting",
+        "Professional indemnity insurance recommended",
+        "VAT applies on all consulting services if registered",
+        "TDS applies on payments received from businesses (15%)",
+        "Can operate from home (no commercial space requirement)"
+      ],
+      "registration_path": [
+        "1. Register business structure",
+        "2. PAN registration",
+        "3. VAT registration if turnover >50 lakhs",
+        "4. Open business bank account",
+        "5. Optional: Professional body membership"
+      ],
+      "tax_treatment": {
+        "income_tax": "Personal rates for sole prop, 25% for Pvt Ltd",
+        "vat": "13% on services",
+        "tds_deducted": "15% by clients (adjustable against tax)"
+      }
+    },
+    "ecommerce": {
+      "sector": "Information Technology / Retail Trade",
+      "business_category": "Online Retail Platform",
+      "recommended_structure": "Private Limited Company",
+      "reasoning": "Payment gateway requirements, investor expectations, liability protection",
+      "specific_rules": [
+        "Payment gateway integration requires Pvt Ltd (banks prefer)",
+        "Electronic Transaction Act 2063 compliance required",
+        "Consumer protection rules apply",
+        "Cross-border sales have customs implications",
+        "Data protection compliance increasingly important"
+      ],
+      "registration_path": [
+        "1. Register as Private Limited Company",
+        "2. PAN registration",
+        "3. VAT registration (usually mandatory)",
+        "4. Domain and business verification for payment gateways",
+        "5. Consider NRB approval for foreign payment processing"
+      ],
+      "special_considerations": [
+        "COD handling requires logistics partnerships",
+        "Return/refund policies required by law",
+        "Digital invoicing mandatory for VAT"
+      ]
+    },
+    "import_export": {
+      "sector": "International Trade",
+      "business_category": "Trading Company",
+      "recommended_structure": "Private Limited Company",
+      "reasoning": "LC facilities, customs clearance, credibility with foreign partners",
+      "specific_rules": [
+        "Import license required from Department of Commerce",
+        "Export license for controlled goods",
+        "Letter of Credit requires Pvt Ltd status (most banks)",
+        "Customs bond may be required",
+        "Pre-shipment inspection for certain goods"
+      ],
+      "registration_path": [
+        "1. Private Limited Company registration",
+        "2. PAN and VAT registration (mandatory)",
+        "3. Import/Export code from DoC",
+        "4. Bank relationship for LC facilities",
+        "5. Customs broker arrangement",
+        "6. Warehouse registration if applicable"
+      ],
+      "customs_basics": {
+        "import_duty": "0-80% depending on HS code",
+        "vat_on_import": "13% on CIF + duty value",
+        "excise": "Applicable on specific items (alcohol, tobacco, vehicles)"
+      }
+    },
+    "education": {
+      "sector": "Education Services",
+      "business_category": "Educational Institution / Training Center",
+      "recommended_structure": "Non-profit (school) or Pvt Ltd (training/coaching)",
+      "reasoning": "Schools must be non-profit, private coaching can be for-profit",
+      "specific_rules": [
+        "Schools require Ministry of Education approval",
+        "Training centers need CTEVT affiliation for certified courses",
+        "Language/coaching institutes can operate as business",
+        "VAT exempt for formal education",
+        "Foreign curriculum requires special approval"
+      ],
+      "registration_path": [
+        "1. Determine category (formal school vs training center)",
+        "2. For schools: Non-profit registration + MoE approval",
+        "3. For training: Business registration + relevant affiliation",
+        "4. PAN registration",
+        "5. Infrastructure inspection and approval"
+      ]
+    },
+    "healthcare": {
+      "sector": "Health Services",
+      "business_category": "Medical/Healthcare Facility",
+      "recommended_structure": "Private Limited Company (clinic/hospital)",
+      "reasoning": "Liability protection, regulatory requirements, professional standards",
+      "specific_rules": [
+        "Nepal Medical Council registration for doctors",
+        "Ministry of Health license for facilities",
+        "Pharmacy license separate from medical practice",
+        "Medical equipment import has specific procedures",
+        "Health insurance participation increasingly required"
+      ],
+      "registration_path": [
+        "1. Professional council registration (doctors/nurses)",
+        "2. Private Limited Company registration",
+        "3. Ministry of Health facility license",
+        "4. PAN registration",
+        "5. Infrastructure and equipment certification"
+      ]
+    },
+    "construction": {
+      "sector": "Construction and Real Estate",
+      "business_category": "Construction Company",
+      "recommended_structure": "Private Limited Company",
+      "reasoning": "Contract bidding, liability, bonding requirements",
+      "specific_rules": [
+        "FCAN (Federation of Contractors) registration for government contracts",
+        "Category classification (A, B, C, D) based on capacity",
+        "Performance bond required for contracts",
+        "Labor law compliance critical",
+        "Environmental clearance for large projects"
+      ],
+      "registration_path": [
+        "1. Private Limited Company registration",
+        "2. PAN and VAT registration",
+        "3. FCAN membership and classification",
+        "4. Equipment and capacity documentation",
+        "5. Bank guarantee facility arrangement"
+      ],
+      "tax_specifics": {
+        "tds_rate": "1.5% TDS on contract payments",
+        "vat": "13% on construction services",
+        "advance_tax": "Contractors subject to advance tax"
+      }
+    }
+  },
+  "default_assumptions": {
+    "location": "Kathmandu",
+    "scale": "Small to Medium Enterprise",
+    "timeline": "Immediate registration",
+    "budget": "Standard registration costs",
+    "ownership": "Single owner or small team"
+  },
+  "nepal_business_structures": {
+    "sole_proprietorship": {
+      "min_capital": "None specified",
+      "registration_office": "District Administration Office (DAO)",
+      "liability": "Unlimited personal liability",
+      "taxation": "Personal income tax rates",
+      "best_for": ["Freelancers", "Small retail", "Individual consultants"],
+      "registration_cost": "NPR 1,000-5,000",
+      "annual_renewal": "Required"
+    },
+    "partnership": {
+      "min_capital": "None specified",
+      "registration_office": "District Administration Office (DAO)",
+      "liability": "Joint and several liability",
+      "taxation": "Partnership taxed, then distributed",
+      "best_for": ["Professional firms", "Family businesses", "Joint ventures"],
+      "registration_cost": "NPR 5,000-10,000",
+      "partnership_deed": "Required"
+    },
+    "private_limited": {
+      "min_capital": "NPR 1,00,000 (1 lakh)",
+      "registration_office": "Office of Company Registrar (OCR)",
+      "liability": "Limited to share capital",
+      "taxation": "25% corporate tax rate",
+      "best_for": ["Startups seeking investment", "Tech companies", "Manufacturing", "Any growth-oriented business"],
+      "registration_cost": "NPR 15,000-30,000",
+      "min_shareholders": 1,
+      "max_shareholders": 101,
+      "share_transfer": "Restricted"
+    },
+    "public_limited": {
+      "min_capital": "NPR 1,00,00,000 (1 crore)",
+      "registration_office": "Office of Company Registrar (OCR) + SEBON",
+      "liability": "Limited to share capital",
+      "taxation": "25% corporate tax (20% if listed)",
+      "best_for": ["Large enterprises", "Companies planning IPO"],
+      "registration_cost": "NPR 50,000+",
+      "min_shareholders": 7
+    }
+  },
+  "quick_responses": {
+    "greeting_keywords": ["hello", "hi", "namaste", "hey", "good morning", "good evening"],
+    "thanks_keywords": ["thank you", "thanks", "dhanyabad", "appreciated"],
+    "confusion_keywords": ["confused", "don't understand", "what do you mean", "unclear"]
+  }
+}
